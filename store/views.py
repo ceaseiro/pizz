@@ -19,7 +19,7 @@ def store(request):
     combo = Product.objects.filter(combo=True).order_by('id')
     highlight_include = Product.objects.filter(highlight_include=True).order_by('id')
     locations = Location.objects.all()
-    return render (request, 'store.html', {
+    return render (request, 'index.html', {
         'products': products, 
         'cart': cart, 
         'combo': combo, 

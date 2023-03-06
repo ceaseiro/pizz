@@ -1,6 +1,6 @@
-{%extends 'base.html'%}
+{%extends 'index.html'%}
 
-{%block content%}
+{% load static %}
 
     <!-- CHECKOUT -->
 
@@ -17,11 +17,11 @@
                   <form class="row g-3" id ='shipping-form'>
                   
                   <div id = 'shippingInfo'>
-                      <h3>Shipping Information</h3>
+                      <h3>Informações de Entrega</h3>
                       
                       <div class = 'row'>
                           <div class="col-md-6">
-                              <label for="inputEmail4" class="form-label">Address</label>
+                              <label for="inputEmail4" class="form-label">Endereço</label>
                               <input type="text" class="form-control" id="inputEmail4" name = 'address' required style="border-radius: 30px;">
                             </div>
                             <div class="col-md-6">
@@ -32,11 +32,11 @@
   
                       <div class = 'row'>
                           <div class="col-md-6">
-                              <label for="inputEmail4" class="form-label">State</label>
+                              <label for="inputEmail4" class="form-label">Status</label>
                               <input type="text" class="form-control" id="inputEmail4" name = 'state' required style="border-radius: 30px;">
                             </div>
                             <div class="col-md-6">
-                              <label for="inputPassword4" class="form-label">Zipcode</label>
+                              <label for="inputPassword4" class="form-label">Codigo Postal</label>
                               <input type="text" class="form-control" id="inputPassword4" name = 'zipcode' required style="border-radius: 30px;">
                             </div>
                       </div>
@@ -73,7 +73,7 @@
                     <thead>
                       <tr>
                         
-                        <h2>Order Summary</h2>
+                        <h2>Lista de pedidos</h2>
                         <h3><strong>Total: $0</strong><h3></h3>
                       </tr>
                     </thead>
