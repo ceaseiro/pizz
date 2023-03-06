@@ -1,0 +1,359 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+
+
+  <!-- CARROSSEL -->
+
+
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      {% for product in banner_include %}
+      <div class="carousel-item active" data-bs-interval="5000">
+        <img src="{{product.banner.url}}" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <!-- <h5>{{bannerproduct.title}}</h5>
+          <p>{{bannerproduct.description}}</p> -->
+          <a class="btn btn-warning btn-lg shadow addtocart" data-action="add" data-product = "{{product.id}}" style="border-color: black; color: black;">Comprar</a>
+          <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20da%20PIZZA%20{{product.name}}!" target="_blank" class="btn btn-success btn-lg shadow bi-whatsapp" style="border-color: black;"> Whats</a>
+        </div>
+      </div>
+      {% endfor %}
+      
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- END CARROSSEL -->
+
+        <!-- highlight -->
+<section id="highlight" class="bg bg-gradient shadow" style="background-color: rgb(252, 185, 41);"> 
+
+{% for product in highlight_include %}
+  <div class="container text-center" style="margin-top: 50px;">
+    <div class="row">
+      <div class="col" style="margin-bottom: -30px;">
+        
+        
+
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-5" data-aos="fade-up">
+            <img src="{{product.highlight_section_title.url}}" style="width: 100%;">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container text-center">
+    <div class="row">
+      
+
+      
+
+
+      <div class="col-4">
+        
+        <div class="cols">
+            <!-- <h5 class="badge rounded-pill text-bg-primary">MEXICANA</h5> -->
+            <!-- <h1><span class="badge bg shadow" style="background-color: rgb(253, 190, 53); color: rgb(121, 0, 0);">MEXICANA</span></h1> -->
+            <img src="{{product.highlight_section_name.url}}" style="width: 80%; height: auto;">
+        </div>
+          
+        <div class="row">
+          <p>
+            <h5 style="color: black;">
+              Arriba! Este sabor foi feito para os amantes da culinária mexicana. Calabresa, pimentões e a pimenta dedo de moça são os ingredientes principais de uma pizza que vai te levar direto para a capital do México.
+            </h5>
+          </p>
+          <div class="row">
+              <div class="col">
+                  <a class="btn btn shadow addtocart" data-action="add" data-product = "{{product.id}}" style="color: white; background-color: rgb(230, 0, 0); border-radius: 30px;">Adicionar ao Carrinho</a>
+                  <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20da%20PIZZA%20{{product.name}}!" target="_blank" class="btn btn-success btn shadow bi-whatsapp" style="border-radius: 30px;"> Whats</a>
+              </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-8">
+        <img src="{{product.highlight_section_product.url}}" style="width: 100%; height: auto;">
+      </div>
+    
+    </div>
+  </div>
+<br>
+{% endfor %}
+
+</section>
+          <!-- end highlight -->
+
+  
+
+<section id="products" style="background-color: rgb(170, 25, 25); ">
+  
+  
+  
+  <div class="container text-center" style="margin-top: 50px;">
+    <div class="row">
+      <div class="col">
+        
+        
+
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-5" data-aos="fade-up">
+            <img src="{% static 'image/sabores.png' %}" style="width: 100%;">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="row row col-8">
+      {% include '_messages.html' %}
+    </div>
+  </div>
+  
+
+<div class="container text-center">
+    <div class="row"> <!-- row row-cols-4 -->
+      
+
+      {%for product in products %}
+
+        <div class="col">
+        
+            <div class="card shadow" style="width: 18rem; border: 0ch; background-color: rgb(255, 196, 0);">
+              <img src="{{product.image.url}}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal{{product.id}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <a class="btn btn shadow-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{product.id}}" style="color: rgb(88, 0, 0); border-color: rgb(88, 0, 0);"><h5>{{product.name}}</h5></a>
+                <p class="card-text"><h4 style="color: black;">R${{product.price}}</h4></p>
+                <!-- <a href="{% url 'productinfo' product.id %}" class="card-text">saiba mais</a> -->
+
+                <p>
+                  <a class="btn badge rounded-pill text-bg" style="background-color: rgb(175, 0, 0); color: white;" data-bs-toggle="collapse" href="#collapseExample{{product.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Ingredientes
+                  </a>
+                </p>
+                <div class="collapse" id="collapseExample{{product.id}}">
+                  <div class="card card-body" style="background-color: rgb(170, 25, 25); color: rgb(255, 255, 255);">
+                    {{product.ingredients_product}}
+                  </div>
+                </div>
+
+                <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20da%20PIZZA%20{{product.name}}!" target="_blank" class="btn btn-success btn shadow-sm bi-whatsapp" style="border-radius: 30px; margin-top: 15px;"> Pedir pelo Whats</a>
+                <a class="btn btn shadow addtocart" id="liveToastBtn" style="background-color: rgb(230, 0, 0); margin-top: 5px; color: white; border-radius: 30px;" data-action="add" data-product = "{{product.id}}" >Adicionar ao Carrinho</a>
+              </div>
+            </div>
+
+        </div>
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content" style="background-color: rgb(170, 25, 25);">
+      <div class="modal-header" style="color: rgb(255, 196, 0);">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{product.name}}</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: rgb(255, 205, 42);">
+        
+        <p><h5 style="color: rgb(90, 0, 0);">{{product.ingredients_product}}</h5></p>
+
+        <div class="card shadow" style="border: transparent;">
+          <img src="{{product.image.url}}" class="card-img" alt="...">
+        </div>
+
+        <div class="row text-center">
+          <div class="col">
+            <div id="list-example">
+              <p><h5 style="color: rgb(90, 0, 0);">{{product.description_product}}</h5></p>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+        <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20da%20PIZZA%20{{product.name}}!" target="_blank" class="btn btn-success btn shadow-sm bi-whatsapp"> Pedir pelo Whats</a>
+        <button type="button" class="btn btn-warning shadow-sm addtocart" data-action="add" data-product = "{{product.id}}">Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+
+
+      {%endfor%}
+
+    </div>
+  </div>
+
+
+
+  
+
+<br>
+<br>
+</section>
+
+
+<section id="combos" style="background-color: rgb(255, 177, 75);">
+  
+  <div class="container text-center" style="margin-top: 50px;">
+    <div class="row">
+      <div class="col">
+        
+        
+
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-5" data-aos="fade-up">
+            <img src="{% static 'image/supercombos_name4.png' %}" style="width: 120%;">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center" style="margin-top: -10px;">
+    <div class="row">
+
+      {%for product in combo %}
+
+        <div class="col">
+        
+            <div class="card shadow" style="width: 18rem; border: 0ch; background-color: rgb(170, 25, 25);">
+              <img src="{{product.image.url}}" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal{{product.id}}" class="card-img-top" alt="...">
+              <div class="card-body">
+
+                <a class="btn shadow" data-bs-toggle="modal" data-bs-target="#exampleModal{{product.id}}" style="color: rgb(255, 255, 255); border-color: white;"><h5>{{product.name}}</h5></a>
+                <p class="card-text" style="border: 30px; border-color: white;"><h4 style="color: rgb(255, 255, 255);">R${{product.price}}</h4></p>
+
+                <p>
+                  <a class="btn badge rounded-pill text-bg" style="background-color: rgb(255, 236, 174); color: rgb(0, 0, 0);" data-bs-toggle="collapse" href="#collapseExample{{product.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Ingredientes
+                  </a>
+                </p>
+
+                <div class="collapse" id="collapseExample{{product.id}}">
+                  <div class="card card-body" style="background-color: rgb(255, 224, 121);">
+                    {{product.ingredients_product}}
+                  </div>
+                </div>
+
+                <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20do%20COMBO%20{{product.name}}!" target="_blank" class="btn btn-success btn shadow-sm bi-whatsapp" style="border-radius: 30px; margin-top: 15px;"> Pedir pelo Whats</a>
+                <a class="btn btn shadow addtocart" style="background-color: rgb(255, 196, 0); margin-top: 5px; color: rgb(0, 0, 0); border-radius: 30px;" data-action="add" data-product = "{{product.id}}" >Adicionar ao Carrinho</a>
+              </div>
+            </div>
+
+        </div>
+
+
+        <!-- Modal -->
+<div class="modal fade" id="exampleModal{{product.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content" style="background-color: rgb(170, 25, 25);">
+      <div class="modal-header" style="color: rgb(255, 196, 0);">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{product.name}}</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="background-color: rgb(255, 205, 42);">
+        
+        <p><h5 style="color: rgb(90, 0, 0);">{{product.ingredients_product}}</h5></p>
+
+        <div class="card shadow" style="border: transparent;">
+          <img src="{{product.image.url}}" class="card-img" alt="...">
+        </div>
+
+        <div class="row text-center">
+          <div class="col">
+            <div id="list-example">
+              <p><h5 style="color: rgb(90, 0, 0);">{{product.description_product}}</h5></p>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Fechar</button>
+        <a href="https://wa.me/5586981926935?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido%20do%20COMBO%20{{product.name}}!" target="_blank" class="btn btn-success btn shadow-sm bi-whatsapp"> Pedir pelo Whats</a>
+        <button type="button" class="btn btn-warning addtocart shadow-sm" data-action="add" data-product = "{{product.id}}">Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+
+
+      {%endfor%}
+
+    </div>
+  </div>
+  <br>
+
+
+</section>
+
+
+
+<section id="location" style="background-color: rgb(170, 25, 25);">
+
+
+  <div class="container text-center" style="margin-top: 50px;">
+    <div class="row">
+      <div class="col">
+        
+        
+
+        <div class="row justify-content-center text-center mb-5">
+          <div class="col-md-5" data-aos="fade-up">
+            <img src="{% static 'image/location2.png' %}" style="width: 120%;">
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="container text-center">
+    
+    <div class="row">
+      
+      {% for location in locations %}
+      <div class="col">
+        
+        <div class="row">
+          <iframe src="{{location.map_location}}" width="600" height="450" style=" border-radius: 60px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+      {% endfor %}
+    
+    </div>
+  </div>
+  <br><br>
+
+
+</section>
+
+
+
+{%endblock%}

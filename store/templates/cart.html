@@ -1,0 +1,121 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="page-content" style="flex: 1 0 auto; background-color: rgb(170, 25, 25);">
+    <!-- CART -->
+<section style="background-color: rgb(170, 25, 25);">
+
+    <div class = 'container' style = "width: 100%; margin-top: 20px;">
+        <table class="table table-hover shadow" style="background-color: rgb(255, 228, 141); border-radius: 30px; border-color: black;">
+            <thead>
+              <tr>
+                <th scope="col"><a href="{% url 'store' %}" style="border-radius: 30px; background-color: rgb(170, 25, 25); color: rgb(255, 220, 105);" class="btn btn btn-lg shadow">Continue comprando → </a></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+             
+              <tr>
+                <th scope="row">
+                  <h3><strong>Items: {{cart.get_itemtotal}}</strong></h3>
+                
+                <!-- CAIXA MARCAR -->
+
+                  <!-- <ul class="list-group">
+                    <li class="list-group-item" style="background-color: transparent; border: transparent;">
+                      
+                      <form method="get" action="{{True}}">
+                        <input class="form-check-input me-1" name="retirarnaloja" type="checkbox" value="true" id="firstCheckbox">
+                        <label class="form-check-label" for="firstCheckbox">First checkbox</label>
+
+                      </form>
+
+                    </li>
+                  </ul> -->
+
+
+                
+                </th>
+                <td></td>
+                <td><h3><strong>Total: R$ {{cart.get_cart_total | floatformat:2}}</strong></h3></td>
+                <!-- <td></td> -->
+                <td><!-- <button type="button" class="btn btn-primary btn-lg" style="border-radius: 30px;">Checkout →</button> -->
+                
+                    <!-- Replace "test" with your own sandbox Business account app client ID -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AYXfjgW-yUQtL_LXDzC4ATKf67UoIl_Ogr5cgMAMT9DXwbnyHabOPiIbHiYGp7F2oZ8tjLAdQZwMonUP&currency=BRL"></script>
+  <!-- Set up a container element for the button -->
+  <div id="paypal-button-container"></div>
+  <script>
+    paypal.Buttons({
+      // Sets up the transaction when a payment button is clicked
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: '{{cart.get_cart_total | floatformat:2}}' // Can also reference a variable or function
+            }
+          }]
+        });
+      },
+      // Finalize the transaction after payer approval
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(function(orderData) {
+          // Successful capture! For dev/demo purposes:
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+          const transaction = orderData.purchase_units[0].payments.captures[0];
+          alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+          // When ready to go live, remove the alert and show a success message within this page. For example:
+          // const element = document.getElementById('paypal-button-container');
+          // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+          // Or go to another URL:  actions.redirect('thank_you.html');
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+    
+    
+        <!-- Cart Section -->
+    <div class = 'container shadow' style = 'margin-top: 50px; width: 70%; background-color: rgb(255, 228, 141); border-radius: 30px;'>
+    <table class="table table table-hover">
+        <thead>
+          <tr style="border-color: black;">
+            <th scope="col" ></th>
+            <th scope="col" ><h4><strong>Item</strong></h4></th>
+            <th scope="col" ><h4><strong>Preço</strong></h4></th>
+            <th scope="col" ><h4><strong>Quantidade</strong></h4></th>
+            <th scope="col" ><h4><strong>Total</strong></h4></th>
+          </tr>
+        </thead>
+        <tbody>
+    
+          {% for item in cartitems %}
+
+            <tr style="border-color: black; ">
+              <th scope="row" ><div id = "cart_image"><img src = {{item.product.image.url}}></div></th>
+              <td ><h5>{{item.product.name}}</h5></td>
+              <td ><h5>R$ {{item.product.price}}</h5></td>
+              <td ><input type = 'number' class = 'quantity' value = "{{item.quantity}}" style = 'width: 50px; padding-left: 5px'></td>
+              <td ><h5>R$ {{item.get_total | floatformat:2}}</h5></td>
+            </tr>
+          
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+    <br>
+
+</section>
+</div>
+
+{%endblock%}
