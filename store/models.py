@@ -9,7 +9,9 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name = "CONFIGURAÇÃO"
+        verbose_name_plural = "CONFIGURAÇÃO"
 
 
 class Product(models.Model):
@@ -29,7 +31,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
+    class Meta:
+        verbose_name = "PRODUTOS"
+        verbose_name_plural = "PRODUTOS"
 
 class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -50,6 +54,9 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+    class Meta:
+        verbose_name = "CARRINHO"
+        verbose_name_plural = "CARRINHO"
 
 class Cartitems(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -65,6 +72,9 @@ class Cartitems(models.Model):
 
     def __str__(self):
         return self.product.name
+    class Meta:
+        verbose_name = "ITENS DO CARRINHO"
+        verbose_name_plural = "iTENS DO CARRINHO"
 
 class ShippindAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -76,6 +86,9 @@ class ShippindAddress(models.Model):
 
     def __str__(self):
         return self.address
+    class Meta:
+        verbose_name = "ENDEREÇO DE ENTREGA"
+        verbose_name_plural = "ENDEREÇO DE ENTREGA"
 
 """ class BannerProduct(models.Model):
     title = models.CharField(max_length=100)
@@ -89,6 +102,9 @@ class Perfume_search(models.Model):
     name_of_perfume = models.CharField(max_length=100)
     def __str__(self):
         return self.name_of_perfume
+    class Meta:
+        verbose_name = "PESQUISA"
+        verbose_name_plural = "PESQUISA"
 
 
 class Location(models.Model):
@@ -96,4 +112,6 @@ class Location(models.Model):
     map_location = models.TextField(max_length=500)
     def __str__(self):
         return self.name_location
-    
+    class Meta:
+        verbose_name = "ENDEREÇO"
+        verbose_name_plural = "ENDEREÇO"
